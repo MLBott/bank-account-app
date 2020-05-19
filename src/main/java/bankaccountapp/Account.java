@@ -19,6 +19,6 @@ public abstract class Account implements IBaseRate {
     }
 
 
-    // List common methods
+    // List the common methods
 
 }
