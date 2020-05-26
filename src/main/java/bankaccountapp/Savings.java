@@ -8,7 +8,9 @@ public class Savings extends Account {
     // Constructor to initialize settings for the savings account properties
     public Savings(String name, String sSN, double initDeposit) {
         super(name, sSN, initDeposit);
-        accountNumber = "1" + accountNumber;
+        if (accountNumber.matches("[0-9]+")) {
+            accountNumber = "1" + accountNumber;
+        }
     }
 
     public void showInfo() {
