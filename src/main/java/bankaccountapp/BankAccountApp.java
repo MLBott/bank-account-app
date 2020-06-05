@@ -2,6 +2,7 @@ package main.java.bankaccountapp;
 
 public class BankAccountApp {
 
+
     public static void main(String[] args) {
 
         Checking chkacc1 = new Checking("John Smith", "321456879", 1500);
@@ -10,9 +11,7 @@ public class BankAccountApp {
         chkacc1.showInfo();
         System.out.println("****************");
         savacc1.showInfo();
-
-
-
+        savacc1.compound();
         // Read a CSV File and then create new accounts based on that data
     }
 

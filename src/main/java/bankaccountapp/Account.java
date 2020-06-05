@@ -5,6 +5,7 @@ public abstract class Account implements IBaseRate {
     String name;
     String sSN;
     double balance;
+  
 
     static int index = 10000;
     public String accountNumber;
@@ -12,13 +13,17 @@ public abstract class Account implements IBaseRate {
 
     // Constructor to set base properties and initialize the account
     public Account(String name, String sSN, double initDeposit) {
+        index++;
         this.name = name;
         this.sSN = sSN;
         balance = initDeposit;
-        // Set account number
-        index++;
         this.accountNumber = setAccountNumber();
+        // Set account number
+        setRate();
+        System.out.println(getBaseRate());
     }
+
+    public abstract void setRate();
 
     private String setAccountNumber() {
         String lastTwoOfsSN = sSN.substring(sSN.length()-2, sSN.length());
@@ -31,13 +36,48 @@ public abstract class Account implements IBaseRate {
         return combinedNum;
     }
 
-
+    public double compound() {
+        double accruedInterest = balance * (rate/100);
+        balance = balance + accruedInterest;
+        System.out.println("Accrued Interest: $" + accruedInterest);
+        printBalance();
+        return balance;
+    }
     // List the common methods
+
+    public double deposit(double amount) {
+        balance = balance + amount;
+        System.out.println("Depositing $" + amount);
+        printBalance();
+        return balance;
+    }
+
+    public double withdraw(double amount) {
+        balance = balance - amount;
+        System.out.println("Withrawing $" + amount);
+        printBalance();
+        return balance;
+    }
+
+    public double transfer(String toWhere, double amount) {
+        balance = balance - amount;
+        System.out.println("Transfering $" + amount + " to " + toWhere);
+        printBalance();
+        return balance;
+    }
+
+    public String printBalance() {
+        String myBal = "Your balance is now: $" + balance;
+        System.out.println(myBal);
+        return myBal;
+    }
+
     public void showInfo() {
         System.out.println(
                 "NAME: " + name +
                 "\nACCOUNT NUMBER: " + accountNumber +
-                "\nBALANCE: " + balance
+                "\nBALANCE: " + balance +
+                "\nRATE: " + rate + "%"
                 );
     }
 
